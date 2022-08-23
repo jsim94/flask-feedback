@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+
+
+{% block content %}
+<div class="mt-3">
+  <p>Username: {{user.username}}</p>
+  <p>Email: {{user.email}}</p>
+  <p>First Name: {{user.first_name}}</p>
+  <p>Last Name: {{user.last_name}}</p>
+</div>
+<div>
+  <form action="/users/{{user.username}}/delete" , method="POST">
+    <a href="/users/{{user.username}}/feedback/add" class="btn btn-primary btn-sm">Add Feedback</a>
+    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+  </form>
+</div>
+<div class="mt-3">
+  {% for feedback in user.feedback %}
+  <div class="row">
+    <div class="col">
+      <h3>{{feedback.title}}</h3>
+      <p>{{feedback.content}}</p>
+    </div>
+    <div class="col">
+      <form action="/feedback/{{feedback.id}}/delete" , method="POST">
+        <a href="/feedback/{{feedback.id}}/update" class="btn btn-primary btn-sm">Update</a>
+        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

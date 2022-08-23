@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+
+
+
+{% block content %}
+<div class="row justify-content-center">
+  <form id="register-user-form" method="POST" class="col-8">
+    {{ form.hidden_tag() }}
+    {% for field in form if field.widget.input_type != 'hidden' and field.widget.input_type != 'checkbox' %}
+    <div class="form-group mb-2">
+      {{ field.label(class="form-label") }}
+      {{ field(class="form-control") }}
+
+      {% for error in field.errors %}
+      {{ error }}
+      {% endfor %}
+    </div>
+    {% endfor %}
+    <div class=" float-end"><a href="/" class="btn btn-outline-success">Cancel</a>
+      <button type="submit" class="btn btn-success">Register</button>
+
+    </div>
+  </form>
+</div>
+{% endblock %}
